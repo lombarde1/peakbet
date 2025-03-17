@@ -72,4 +72,26 @@ npm run dev
 - Vite
 - React Router
 - Axios para requisições HTTP
-- Styled Components 
+- Styled Components
+
+## Sincronização com GitHub
+
+Para manter o projeto sincronizado com o repositório GitHub, utilize os seguintes comandos:
+
+### Enviar alterações para o GitHub
+```bash
+# Adicionar todas as alterações
+git add .
+
+# Commit com mensagem descritiva
+git commit -m "Descrição das alterações realizadas"
+
+# Enviar para o GitHub
+git push
+```
+
+### Obter alterações do GitHub
+```bash
+# Receber as alterações mais recentes
+git pull
+``` 
