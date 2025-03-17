@@ -31,6 +31,12 @@ cd backend
 # Instalar dependências
 npm install
 
+# Configurar banco de dados
+# Edite o arquivo .env com as seguintes informações:
+# PORT=5000
+# MONGODB_URI=mongodb://darkvips:lombarde1@147.79.111.143:27017/peakbet
+# JWT_SECRET=sua_chave_secreta_jwt_123_mude_em_producao
+
 # Iniciar o servidor em modo de desenvolvimento
 npm run dev
 ```
