@@ -4,18 +4,17 @@ const User = require('../models/User');
 // Registrar um novo usuário
 exports.register = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { username, password } = req.body;
 
-    // Verificar se o email já existe
-    const existingUser = await User.findOne({ email });
+    // Verificar se o username já existe
+    const existingUser = await User.findOne({ username });
     if (existingUser) {
-      return res.status(400).json({ message: 'Este email já está em uso.' });
+      return res.status(400).json({ message: 'Este nome de usuário já está em uso.' });
     }
 
     // Criar novo usuário
     const user = new User({
-      name,
-      email,
+      username,
       password,
     });
 
@@ -30,8 +29,7 @@ exports.register = async (req, res) => {
       message: 'Usuário registrado com sucesso!',
       user: {
         id: user._id,
-        name: user.name,
-        email: user.email,
+        username: user.username,
         balance: user.balance,
         role: user.role,
       },
@@ -45,18 +43,18 @@ exports.register = async (req, res) => {
 // Login de usuário
 exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
     // Verificar se o usuário existe
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ username });
     if (!user) {
-      return res.status(401).json({ message: 'Email ou senha incorretos.' });
+      return res.status(401).json({ message: 'Nome de usuário ou senha incorretos.' });
     }
 
     // Verificar senha
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
-      return res.status(401).json({ message: 'Email ou senha incorretos.' });
+      return res.status(401).json({ message: 'Nome de usuário ou senha incorretos.' });
     }
 
     // Gerar token
@@ -68,8 +66,7 @@ exports.login = async (req, res) => {
       message: 'Login realizado com sucesso!',
       user: {
         id: user._id,
-        name: user.name,
-        email: user.email,
+        username: user.username,
         balance: user.balance,
         role: user.role,
       },
@@ -86,8 +83,7 @@ exports.getProfile = async (req, res) => {
     res.json({
       user: {
         id: req.user._id,
-        name: req.user.name,
-        email: req.user.email,
+        username: req.user.username,
         balance: req.user.balance,
         role: req.user.role,
         createdAt: req.user.createdAt,
